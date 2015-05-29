@@ -17,8 +17,9 @@ end
 
 # ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
 # 入力してください！
-APIKEY = 'xxxx'
+APIKEY = 'xxxxx'
 # ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+
 
 uri = URI.parse("https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=#{APIKEY}")
 
@@ -36,12 +37,10 @@ talk = {
 response = request_to_docomo(http, req, talk)
 talk["context"] = response["context"]
 
-print 'DCM> '; puts response["utt"]
-
 loop do
+    say_docomo(response)
     print 'YOU> '
     talk["utt"] = gets.chomp
 
     response = request_to_docomo(http, req, talk)
-    say_docomo(response)
 end
